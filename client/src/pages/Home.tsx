@@ -253,6 +253,70 @@ export default function Home() {
         </div>
       </section>
 
+      {/* 姉妹サイトセクション */}
+      <section className="py-16 bg-gradient-to-r from-pink-50 via-white to-blue-50">
+        <div className="container">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2">
+              オディンドの推し活サイト
+            </h2>
+            <p className="text-gray-600">
+              村長オディンドがこっそり応援しているコンビ
+            </p>
+          </div>
+
+          <a
+            href="https://odindinpocopoco.com/jellybeans/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block max-w-2xl mx-auto group"
+          >
+            <Card className="border-2 border-pink-200 hover:border-pink-400 hover:shadow-xl transition-all duration-300 overflow-hidden bg-gradient-to-br from-white to-pink-50">
+              <CardContent className="p-6">
+                <div className="flex items-center gap-6">
+                  {/* アイコン */}
+                  <div className="flex-shrink-0">
+                    <div className="w-20 h-20 bg-gradient-to-br from-pink-400 via-purple-400 to-blue-400 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                      <span className="text-3xl">🫘</span>
+                    </div>
+                  </div>
+
+                  {/* テキスト */}
+                  <div className="flex-1">
+                    <h3 className="text-xl font-bold bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent mb-1">
+                      ジェリービーンズコレクション
+                    </h3>
+                    <p className="text-sm text-gray-500 mb-2">
+                      北海道出身の男女お笑いコンビ
+                    </p>
+                    <p className="text-gray-600 text-sm">
+                      あきはる & いじま のファンページ。ラジオ配信やYouTubeで活躍中！
+                    </p>
+                  </div>
+
+                  {/* 矢印 */}
+                  <div className="flex-shrink-0">
+                    <svg
+                      className="w-6 h-6 text-pink-400 group-hover:translate-x-2 transition-transform duration-300"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </a>
+        </div>
+      </section>
+
       {/* フッター */}
       <footer className="bg-emerald-900 text-emerald-100 py-16">
         <div className="container">
