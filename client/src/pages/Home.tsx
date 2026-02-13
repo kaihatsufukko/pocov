@@ -266,9 +266,7 @@ export default function Home() {
           </div>
 
           <a
-            href="https://odindinpocopoco.com/jellybeans/"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/jellybeans"
             className="block max-w-2xl mx-auto group"
           >
             <Card className="border-2 border-pink-200 hover:border-pink-400 hover:shadow-xl transition-all duration-300 overflow-hidden bg-gradient-to-br from-white to-pink-50">
