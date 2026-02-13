@@ -37,9 +37,10 @@ jobs:
           echo "set ftp:ssl-allow yes" >> /tmp/deploy.lftp
           echo "set ftp:ssl-force no" >> /tmp/deploy.lftp
           echo "set net:max-retries 3" >> /tmp/deploy.lftp
+          echo "set cmd:fail-exit yes" >> /tmp/deploy.lftp
           echo "open -u ${FTP_USER},${FTP_PASS} ${FTP_HOST}" >> /tmp/deploy.lftp
           echo "cd \"${FTP_DIR}\"" >> /tmp/deploy.lftp
-          echo "mirror --reverse --delete --verbose dist/public/ ." >> /tmp/deploy.lftp
+          echo "mirror --reverse --delete --verbose --exclude logs/ --exclude .htaccess dist/public/ ." >> /tmp/deploy.lftp
           echo "bye" >> /tmp/deploy.lftp
           lftp -f /tmp/deploy.lftp
           rm -f /tmp/deploy.lftp
