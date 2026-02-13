@@ -30,11 +30,17 @@ jobs:
         run: pnpm build
 
       - name: Deploy to ConoHa Wing via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./dist/public/
-          server-dir: ${{ secrets.FTP_SERVER_DIR }}/
-          dangerous-clean-slate: true
+        run: |
+          sudo apt-get install -y lftp
+          lftp -u "$FTP_USER,$FTP_PASS" "$FTP_HOST" -e "
+            set ssl:verify-certificate no;
+            set ftp:ssl-allow yes;
+            cd $FTP_DIR;
+            mirror --reverse --delete --verbose ./dist/public/ .;
+            bye
+          "
+        env:
+          FTP_HOST: ${{ secrets.FTP_SERVER }}
+          FTP_USER: ${{ secrets.FTP_USERNAME }}
+          FTP_PASS: ${{ secrets.FTP_PASSWORD }}
+          FTP_DIR: ${{ secrets.FTP_SERVER_DIR }}
