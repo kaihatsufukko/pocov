@@ -33,14 +33,15 @@ jobs:
         shell: bash
         run: |
           sudo apt-get install -y lftp
-          echo "set ssl:verify-certificate no" > /tmp/deploy.lftp
+          echo "open -u ${FTP_USER},${FTP_PASS} ${FTP_HOST}" > /tmp/deploy.lftp
+          echo "set ssl:verify-certificate no" >> /tmp/deploy.lftp
           echo "set ftp:ssl-allow yes" >> /tmp/deploy.lftp
           echo "set ftp:ssl-force no" >> /tmp/deploy.lftp
           echo "set net:max-retries 3" >> /tmp/deploy.lftp
           echo "cd \"${FTP_DIR}\"" >> /tmp/deploy.lftp
           echo "mirror --reverse --delete --verbose dist/public/ ." >> /tmp/deploy.lftp
           echo "bye" >> /tmp/deploy.lftp
-          lftp -u "${FTP_USER},${FTP_PASS}" "${FTP_HOST}" -f /tmp/deploy.lftp
+          lftp -f /tmp/deploy.lftp
           rm -f /tmp/deploy.lftp
         env:
           FTP_HOST: ${{ secrets.FTP_SERVER }}
