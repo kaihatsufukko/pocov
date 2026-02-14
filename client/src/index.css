@@ -174,4 +174,58 @@
       max-width: 1280px; /* Standard content width */
     }
   }
+
+  /* Jellybeans Pop Candyland Animation Styles */
+  @keyframes bubble-float {
+    0%, 100% {
+      transform: translateY(0px) translateX(0px);
+    }
+    25% {
+      transform: translateY(-20px) translateX(10px);
+    }
+    50% {
+      transform: translateY(-40px) translateX(-10px);
+    }
+    75% {
+      transform: translateY(-20px) translateX(15px);
+    }
+  }
+
+  @keyframes jelly-blink {
+    0%, 100% {
+      opacity: 1;
+      filter: drop-shadow(0 0 8px currentColor);
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.5;
+      filter: drop-shadow(0 0 2px currentColor);
+      transform: scale(0.95);
+    }
+  }
+
+  @keyframes jelly-blink-fast {
+    0%, 100% {
+      opacity: 1;
+      filter: drop-shadow(0 0 12px currentColor);
+      transform: scale(1.05);
+    }
+    50% {
+      opacity: 0.3;
+      filter: drop-shadow(0 0 1px currentColor);
+      transform: scale(0.9);
+    }
+  }
+
+  .animate-bubble {
+    animation: bubble-float 4s ease-in-out infinite;
+  }
+
+  .animate-jelly-blink {
+    animation: jelly-blink 0.8s ease-in-out infinite;
+  }
+
+  .animate-jelly-blink-fast {
+    animation: jelly-blink-fast 0.6s ease-in-out infinite;
+  }
 }
