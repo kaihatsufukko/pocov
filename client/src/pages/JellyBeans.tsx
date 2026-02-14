@@ -140,20 +140,9 @@ export default function JellyBeans() {
             <Button
               variant="ghost"
               className="font-bold text-blue-600 hover:bg-blue-100"
-              onClick={() => {
-                document
-                  .getElementById("radio")
-                  ?.scrollIntoView({ behavior: "smooth" });
-              }}
+              onClick={() => setLocation("/jellybeans/radio-diary")}
             >
               ラジオ感想
-            </Button>
-            <Button
-              variant="outline"
-              className="font-bold border-pink-300 text-pink-600 hover:bg-pink-50"
-              onClick={() => setLocation("/")}
-            >
-              ポコポコ村に戻る
             </Button>
           </div>
         </div>
@@ -332,12 +321,6 @@ export default function JellyBeans() {
             </p>
             <img src="/images/jelly-footer.png" alt="jelly" className="w-8 h-8" />
           </div>
-          <button
-            onClick={() => setLocation("/")}
-            className="text-pink-100 hover:text-white transition-colors underline mb-4 block mx-auto"
-          >
-            ポコポコ村トップへ戻る
-          </button>
           <p className="text-sm opacity-90">
             &copy; 2025 Jellybeans Collection Fan Page. All rights reserved.
           </p>
