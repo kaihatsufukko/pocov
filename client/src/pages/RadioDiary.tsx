@@ -1,4 +1,5 @@
-import { Radio, Mic, Star } from "lucide-react";
+import { useState } from "react";
+import { Radio, Mic, Star, ChevronDown } from "lucide-react";
 import { useLocation } from "wouter";
 
 interface DiaryEntry {
@@ -11,6 +12,15 @@ interface DiaryEntry {
 }
 
 const diaryEntries: DiaryEntry[] = [
+  {
+    id: 3,
+    title: "スタエフのエラー",
+    date: "2026年2月13日（金）",
+    platform: "Radio Talk",
+    content:
+      "　スタンドFMで収録後に、くるくる回ってフリーズしてしまった時、保存できないエラー、めっちゃあせりますよね。一人ならまだしも、人と録ってるとまたお願いしづらいですからね💦\n　僕も先月くるくるして止まってしまい、冷や汗たらたら流しながらチャットGPTに聞きながら試した対処法。収録したデータを消さずに済んだ方法。\n\t1.\t通信まわりだけ揺さぶる\n\t　・Wi-Fi ⇄ モバイル通信を切り替え\n\t　・機内モードON→OFF\n\t2.\t「端末の再起動」\n\t　・アプリ強制終了より、端末再起動の方が\u201C下書きとして残る\u201D期待があるとのこと。\n　私は端末を再起動して、スタンドFM再起動で、前回の収録を使用しますか？的なメッセージが出て、事なきを得ました。\n　運が良かったのかもしれません。でも、バックアップで録音するのはめんどくさい〜😹",
+    rating: 5,
+  },
   {
     id: 1,
     title: "最高に面白かった回！",
@@ -31,8 +41,25 @@ const diaryEntries: DiaryEntry[] = [
   },
 ];
 
+const VISIBLE_LINES = 3;
+
 export default function RadioDiary() {
   const [, setLocation] = useLocation();
+  const [expandedEntries, setExpandedEntries] = useState<Set<number>>(
+    new Set(),
+  );
+
+  const toggleExpand = (id: number) => {
+    setExpandedEntries((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) {
+        next.delete(id);
+      } else {
+        next.add(id);
+      }
+      return next;
+    });
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-pink-50 via-white to-purple-50">
@@ -194,9 +221,34 @@ export default function RadioDiary() {
                 </div>
 
                 {/* 本文 */}
-                <p className="text-gray-700 leading-relaxed">
-                  {entry.content}
-                </p>
+                {(() => {
+                  const lines = entry.content.split("\n");
+                  const isLong = lines.length > VISIBLE_LINES;
+                  const isExpanded = expandedEntries.has(entry.id);
+                  const displayLines =
+                    isLong && !isExpanded
+                      ? lines.slice(0, VISIBLE_LINES)
+                      : lines;
+
+                  return (
+                    <>
+                      <p className="text-gray-700 leading-relaxed whitespace-pre-line">
+                        {displayLines.join("\n")}
+                      </p>
+                      {isLong && (
+                        <button
+                          onClick={() => toggleExpand(entry.id)}
+                          className="mt-3 flex items-center gap-1 text-sm font-bold text-pink-500 hover:text-pink-600 transition-colors"
+                        >
+                          <ChevronDown
+                            className={`w-4 h-4 transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`}
+                          />
+                          {isExpanded ? "とじる" : "つづきを読む"}
+                        </button>
+                      )}
+                    </>
+                  );
+                })()}
               </article>
             ))}
           </div>
