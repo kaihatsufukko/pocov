@@ -79,15 +79,6 @@ const radioReviews: RadioReview[] = [
     rating: 5,
     author: "リスナー花子",
   },
-  {
-    id: 3,
-    title: "笑いが止まりませんでした",
-    date: "2025年12月05日",
-    content:
-      "先週のエピソードはホントに面白かった。あきはるのボケとツッコミの絶妙なタイミングが最高です。次の放送も楽しみです。",
-    rating: 4,
-    author: "ジェリーファン",
-  },
 ];
 
 export default function JellyBeans() {
