@@ -228,4 +228,63 @@
   .animate-jelly-blink-fast {
     animation: jelly-blink-fast 0.6s ease-in-out infinite;
   }
+
+  /* Retro Gaming Styles */
+  .font-pixel {
+    font-family: 'DotGothic16', 'Press Start 2P', monospace;
+  }
+
+  .font-pixel-en {
+    font-family: 'Press Start 2P', 'Silkscreen', monospace;
+  }
+
+  @keyframes scanline {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(4px); }
+  }
+
+  @keyframes blink-cursor {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  @keyframes pixel-fade-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .retro-card {
+    border: 3px solid;
+    image-rendering: pixelated;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .retro-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 6px 6px 0px rgba(0,0,0,0.3);
+  }
+
+  .pixel-border {
+    box-shadow:
+      4px 4px 0px rgba(0,0,0,0.25),
+      inset 0 0 0 2px rgba(255,255,255,0.1);
+  }
+
+  .scanlines::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.08) 2px,
+      rgba(0,0,0,0.08) 4px
+    );
+    pointer-events: none;
+  }
+
+  .animate-pixel-fade-in {
+    animation: pixel-fade-in 0.5s ease-out both;
+  }
 }

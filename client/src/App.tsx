@@ -7,12 +7,20 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import JellyBeans from "./pages/JellyBeans";
 import RadioDiary from "./pages/RadioDiary";
+import Music from "./pages/Music";
+import Anime from "./pages/Anime";
+import Games from "./pages/Games";
+import Radio from "./pages/Radio";
 
 
 function Router() {
   return (
     <Switch>
       <Route path={"/"} component={Home} />
+      <Route path={"/music"} component={Music} />
+      <Route path={"/anime"} component={Anime} />
+      <Route path={"/games"} component={Games} />
+      <Route path={"/radio"} component={Radio} />
       <Route path={"/jellybeans"} component={JellyBeans} />
       <Route path={"/jellybeans/radio-diary"} component={RadioDiary} />
       <Route path={"/404"} component={NotFound} />
