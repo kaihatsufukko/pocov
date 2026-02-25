@@ -1,108 +1,643 @@
 /**
- * ゲームページ - SAGA2 / キングコング2 / 十王剣の謎 / レッドアリーマー
+ * メタルビア・ソリッド — ゲームウォッチ風ステルスアクション
+ *
+ * ビール屋のバイトが店長の目を盗んで「銀色に輝くビール（メタルビア）」をこっそり飲みまくるゲーム
  */
 
 import { useLocation } from "wouter";
+import { useRef, useEffect, useCallback, useState } from "react";
 
-const games = [
-  {
-    title: "Sa・Ga2 秘宝伝説",
-    titleEn: "FINAL FANTASY LEGEND II",
-    color: "border-yellow-400",
-    bgColor: "bg-yellow-900/30",
-    textColor: "text-yellow-300",
-    platform: "ゲームボーイ",
-    year: "1990年12月14日",
-    developer: "スクウェア（現スクウェア・エニックス）",
-    genre: "RPG",
-    price: "4,800円",
-    story:
-      "主人公がまだ幼い頃、父は秘宝「精霊の鏡」を託して家を出た。成長した主人公は帰らぬ父を捜すため、学校の仲間3人と旅に出る。「天の柱」で繋がれた9つの異世界を巡り、全77個の秘宝を集める壮大な冒険が始まる。",
-    features: [
-      "人間・エスパー・メカ・モンスターの4種族から仲間を選択",
-      "経験値によらない独自の成長システム",
-      "武器や防具の使用回数制限による戦略的なリソース管理",
-      "和風・中世・未来都市など多様な9つの世界",
-      "秘宝を集めた「新しき神」たちとの戦い",
-      "作曲は植松伸夫と伊藤賢治が担当",
-    ],
-    evaluation: "ファミコン通信クロスレビュー合計33点（ゴールド殿堂入り）",
-    remake: "2009年 ニンテンドーDS『サガ2秘宝伝説 GODDESS OF DESTINY』としてリメイク",
-  },
-  {
-    title: "キングコング2 怒りのメガトンパンチ",
-    titleEn: "KING KONG 2: IKARI NO MEGATON PUNCH",
-    color: "border-red-400",
-    bgColor: "bg-red-900/30",
-    textColor: "text-red-300",
-    platform: "ファミリーコンピュータ",
-    year: "1986年12月18日",
-    developer: "コナミ（開発2課）",
-    genre: "アクション",
-    price: "5,300円",
-    story:
-      "映画『キングコング2』を題材にしたアクションゲーム。キングコングとなってステージを破壊しつくす爽快感が魅力。さらわれたレディコングを助け出すのが目的。",
-    features: [
-      "パンチ・踏み付け・岩投げの3種類の攻撃が可能",
-      "マップ上の障害物も破壊できる爽快感",
-      "全9ステージ構成",
-      "ボスを倒しワープの扉を見つけて進む",
-      "クリア後もループで2周目、3周目と続く",
-      "音楽は山下絹代氏ら実力派が担当",
-    ],
-    evaluation: "一時はコナミの代表キャラにもなった人気作",
-    note: "タイトルに『2』とあるがファミコンゲームとしては1作目。映画『キングコング2』のゲーム化作品。",
-  },
-  {
-    title: "ポケットザウルス 十王剣の謎",
-    titleEn: "POCKET ZAURUS: JUOUKEN NO NAZO",
-    color: "border-green-400",
-    bgColor: "bg-green-900/30",
-    textColor: "text-green-300",
-    platform: "ファミリーコンピュータ",
-    year: "1987年2月27日",
-    developer: "バンダイ",
-    genre: "横スクロールアクション",
-    story:
-      "西暦2001年の地球。歴史学者であり科学者でもあるハシモト名人は、サラマンダーに魔法をかけられ恐竜の姿に変えられてしまう。強い精神力で心は正義のまま、ブーメランを手にタイムマシンでサラマンダーを追いかける旅に出る。",
-    features: [
-      "全5面（恐竜島→妖怪魔境・未来都市・エジプトをランダム順→神々の時代）",
-      "武器はブーメラン。パワーシールドで3連射にパワーアップ",
-      "アクション中にクイズやシューティングパートも登場",
-      "各ボスを倒して「十王剣」を入手。全て集めないとラスボスに勝てない",
-      "十王剣の配置にはヒントの暗号解読が必要",
-      "「ボクモード」と「パパモード」の2つの難易度",
-    ],
-    evaluation: "ファミコン通信クロスレビュー合計23点（満40点）",
-    note: "バンダイのキャラクター文具『ポケットザウルス』がモチーフ。一般の子供たちが「少年ゲームクリエイター」として制作に参加した異色作。",
-  },
-  {
-    title: "レッドアリーマー 魔界村外伝",
-    titleEn: "GARGOYLE'S QUEST",
-    color: "border-purple-400",
-    bgColor: "bg-purple-900/30",
-    textColor: "text-purple-300",
-    platform: "ゲームボーイ",
-    year: "1990年5月2日",
-    developer: "カプコン",
-    genre: "アクションRPG",
-    story:
-      "『魔界村』シリーズの敵キャラクター「レッドアリーマー」が主人公。戦士の試験から帰ると、謎の大軍団に襲われ魔界が壊滅状態に。レッドアリーマーは魔界を救うため、各地の魔王たちと協力しながら戦いに挑む。",
-    features: [
-      "アクションパートとRPGパートの2構成",
-      "翼で空を飛ぶ「ホバリング」、壁に張り付く「ヘルクライム」などの独特なアクション",
-      "ステージクリアごとに新しい魔力（バスター、クロー、ダークファイヤー）を獲得",
-      "RPGパートでフィールドを移動し、敵と遭遇するとアクションパートに切り替わる",
-      "カプコン初の携帯型ゲーム機参入タイトル",
-      "『魔界村』の最強雑魚敵が主人公という逆転の発想",
-    ],
-    evaluation: "魔界村シリーズとしては難易度低めだが、それでも歯ごたえのあるアクション",
-    note: "続編『レッドアリーマーII』（FC/1992年）、『魔界村外伝 THE DEMON DARKNESS』（GB/1993年）、SFCの『デモンズブレイゾン』へと続くシリーズ。",
-  },
-];
+// ── 定数 ──
+const CANVAS_W = 400;
+const CANVAS_H = 560;
+const FPS = 12; // ゲームウォッチ風の低フレームレート
 
+const POSITIONS = [0, 1, 2] as const; // 左・中央・右
+type Pos = 0 | 1 | 2;
+
+const LCD_BG = "#9ead86";       // LCD緑背景
+const LCD_DARK = "#1a2010";     // LCD濃いドット
+const LCD_GHOST = "rgba(26,32,16,0.08)"; // ゴースト残像
+const LCD_ACCENT = "#c0c0c0";   // メタルビア銀色
+
+// 店長の向き
+type BossDir = "left" | "right" | "turning";
+
+// ゲーム状態
+type GameState = "title" | "playing" | "gameover";
+
+// ── メインコンポーネント ──
 export default function Games() {
   const [, setLocation] = useLocation();
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const gameRef = useRef<GameData | null>(null);
+  const animFrameRef = useRef<number>(0);
+  const lastFrameRef = useRef<number>(0);
+  const [, setTick] = useState(0); // 再描画トリガー
+
+  // ゲームデータ
+  interface GameData {
+    state: GameState;
+    score: number;
+    highScore: number;
+    lives: number;
+    playerPos: Pos;
+    isDrinking: boolean;
+    drinkTimer: number;      // 飲みモーション残りフレーム
+    drinkPos: Pos;           // 飲み始めた位置
+    bossPos: number;         // 0-2 の連続値（補間用）
+    bossDir: BossDir;
+    bossLookDir: "left" | "right"; // 店長の視線方向
+    bossTurnTimer: number;
+    bossSpeed: number;
+    bossPattern: number;     // 行動パターンカウンタ
+    level: number;
+    combo: number;
+    beers: boolean[];        // 各ポジションにビールがあるか
+    metalBeer: number;       // メタルビア位置 (-1=なし)
+    drunkGauge: number;      // 酔いゲージ 0-100
+    missFlash: number;       // ミス演出フレーム
+    safeFlash: number;       // ギリギリセーフ演出
+    bonusText: string;
+    bonusTimer: number;
+    frameCount: number;
+    beerRespawnTimers: number[]; // ビール復活タイマー
+  }
+
+  const initGame = useCallback((): GameData => {
+    return {
+      state: "title",
+      score: 0,
+      highScore: gameRef.current?.highScore ?? 0,
+      lives: 3,
+      playerPos: 1,
+      isDrinking: false,
+      drinkTimer: 0,
+      drinkPos: 1,
+      bossPos: 2,
+      bossDir: "left",
+      bossLookDir: "right",
+      bossTurnTimer: 0,
+      bossSpeed: 0.02,
+      bossPattern: 0,
+      level: 1,
+      combo: 0,
+      beers: [true, true, true],
+      metalBeer: -1,
+      drunkGauge: 0,
+      missFlash: 0,
+      safeFlash: 0,
+      bonusText: "",
+      bonusTimer: 0,
+      frameCount: 0,
+      beerRespawnTimers: [0, 0, 0],
+    };
+  }, []);
+
+  // ── 店長AI ──
+  const updateBoss = (g: GameData) => {
+    g.bossPattern++;
+
+    // レベルに応じたパターン
+    const turnChance = Math.min(0.02 + g.level * 0.008, 0.08);
+    const speed = Math.min(0.015 + g.level * 0.005, 0.06);
+
+    if (g.bossTurnTimer > 0) {
+      g.bossTurnTimer--;
+      if (g.bossTurnTimer === 0) {
+        // 振り返り完了 → 視線を反転
+        g.bossLookDir = g.bossLookDir === "left" ? "right" : "left";
+        g.bossDir = g.bossLookDir === "left" ? "left" : "right";
+      }
+      return;
+    }
+
+    // ランダム振り返り
+    if (g.level >= 2 && Math.random() < turnChance) {
+      g.bossTurnTimer = g.level >= 3 ? 3 : 5; // Lv3+でフェイント（早い）
+      g.bossDir = "turning";
+      return;
+    }
+
+    // 左右移動
+    if (g.bossDir === "left") {
+      g.bossPos -= speed;
+      if (g.bossPos <= 0) {
+        g.bossPos = 0;
+        g.bossDir = "right";
+        g.bossLookDir = "right";
+      }
+    } else {
+      g.bossPos += speed;
+      if (g.bossPos >= 2) {
+        g.bossPos = 2;
+        g.bossDir = "left";
+        g.bossLookDir = "left";
+      }
+    }
+  };
+
+  // ── 判定 ──
+  const checkCaught = (g: GameData): boolean => {
+    if (!g.isDrinking) return false;
+    // 店長がプレイヤー方向を見ているか
+    const bossDiscrete = Math.round(g.bossPos) as Pos;
+    if (g.bossDir === "turning") return false; // 振り返り中は見えない
+
+    // 視線方向にプレイヤーがいるか
+    if (g.bossLookDir === "left" && g.drinkPos <= bossDiscrete) return true;
+    if (g.bossLookDir === "right" && g.drinkPos >= bossDiscrete) return true;
+    return false;
+  };
+
+  // ── ビール復活 ──
+  const updateBeers = (g: GameData) => {
+    for (let i = 0; i < 3; i++) {
+      if (!g.beers[i]) {
+        g.beerRespawnTimers[i]++;
+        if (g.beerRespawnTimers[i] >= FPS * 3) { // 3秒で復活
+          g.beers[i] = true;
+          g.beerRespawnTimers[i] = 0;
+        }
+      }
+    }
+    // メタルビア出現（低確率）
+    if (g.metalBeer === -1 && g.frameCount % (FPS * 10) === 0 && Math.random() < 0.3) {
+      const emptyPositions = POSITIONS.filter(p => g.beers[p]);
+      if (emptyPositions.length > 0) {
+        g.metalBeer = emptyPositions[Math.floor(Math.random() * emptyPositions.length)];
+      }
+    }
+  };
+
+  // ── 酔いゲージ ──
+  const updateDrunk = (g: GameData) => {
+    if (!g.isDrinking && g.drunkGauge > 0) {
+      g.drunkGauge = Math.max(0, g.drunkGauge - 0.15);
+    }
+    // 酔いMAXで強制発覚
+    if (g.drunkGauge >= 100) {
+      g.drunkGauge = 80;
+      triggerMiss(g, true);
+    }
+  };
+
+  // ── ミス処理 ──
+  const triggerMiss = (g: GameData, drunk = false) => {
+    g.lives--;
+    g.combo = 0;
+    g.isDrinking = false;
+    g.drinkTimer = 0;
+    g.missFlash = FPS; // 1秒間フラッシュ
+    g.bonusText = drunk ? "DRUNK!" : "CAUGHT!";
+    g.bonusTimer = FPS;
+    if (g.lives <= 0) {
+      g.state = "gameover";
+      if (g.score > g.highScore) g.highScore = g.score;
+    }
+  };
+
+  // ── メインループ ──
+  const update = useCallback((g: GameData) => {
+    if (g.state !== "playing") return;
+    g.frameCount++;
+
+    // レベル更新
+    g.level = Math.min(Math.floor(g.score / 500) + 1, 10);
+
+    updateBoss(g);
+    updateBeers(g);
+    updateDrunk(g);
+
+    // 飲みモーション
+    if (g.isDrinking) {
+      g.drinkTimer--;
+
+      if (checkCaught(g)) {
+        triggerMiss(g);
+        return;
+      }
+
+      if (g.drinkTimer <= 0) {
+        // 飲み終わり
+        g.isDrinking = false;
+        const isMetal = g.metalBeer === g.drinkPos;
+        const baseScore = isMetal ? 500 : 100;
+        g.combo++;
+        const points = baseScore * g.combo;
+        g.score += points;
+        g.drunkGauge = Math.min(100, g.drunkGauge + (isMetal ? 15 : 8));
+
+        if (isMetal) {
+          g.metalBeer = -1;
+          g.bonusText = `METAL! +${points}`;
+        } else {
+          g.bonusText = g.combo > 1 ? `${g.combo}COMBO! +${points}` : `+${points}`;
+        }
+        g.bonusTimer = FPS;
+
+        // ギリギリセーフ判定
+        if (g.bossTurnTimer > 0 && g.bossTurnTimer <= 3) {
+          g.score += 200;
+          g.safeFlash = FPS / 2;
+          g.bonusText = `CLOSE! +${points + 200}`;
+        }
+      }
+    }
+
+    // 演出タイマー
+    if (g.missFlash > 0) g.missFlash--;
+    if (g.safeFlash > 0) g.safeFlash--;
+    if (g.bonusTimer > 0) g.bonusTimer--;
+  }, []);
+
+  // ── 描画 ──
+  const render = useCallback((ctx: CanvasRenderingContext2D, g: GameData) => {
+    const w = CANVAS_W;
+    const h = CANVAS_H;
+
+    // LCD背景
+    ctx.fillStyle = LCD_BG;
+    ctx.fillRect(0, 0, w, h);
+
+    // スキャンライン
+    ctx.fillStyle = "rgba(0,0,0,0.03)";
+    for (let y = 0; y < h; y += 3) {
+      ctx.fillRect(0, y, w, 1);
+    }
+
+    if (g.state === "title") {
+      renderTitle(ctx, g);
+      return;
+    }
+
+    if (g.state === "gameover") {
+      renderGameOver(ctx, g);
+      return;
+    }
+
+    // ミスフラッシュ
+    if (g.missFlash > 0 && g.missFlash % 2 === 0) {
+      ctx.fillStyle = "rgba(200,50,50,0.15)";
+      ctx.fillRect(0, 0, w, h);
+    }
+
+    // ギリギリセーフフラッシュ
+    if (g.safeFlash > 0) {
+      ctx.fillStyle = "rgba(200,200,50,0.1)";
+      ctx.fillRect(0, 0, w, h);
+    }
+
+    // ── HUD ──
+    ctx.fillStyle = LCD_DARK;
+    ctx.font = "bold 16px 'DotGothic16', monospace";
+    ctx.textAlign = "left";
+    ctx.fillText(`SCORE: ${String(g.score).padStart(5, "0")}`, 15, 30);
+    ctx.textAlign = "right";
+    // 残機
+    for (let i = 0; i < 3; i++) {
+      ctx.fillStyle = i < g.lives ? LCD_DARK : LCD_GHOST;
+      ctx.fillText("🍺", w - 15 - (2 - i) * 28, 30);
+    }
+    // レベル
+    ctx.fillStyle = LCD_DARK;
+    ctx.font = "12px 'DotGothic16', monospace";
+    ctx.textAlign = "left";
+    ctx.fillText(`LV.${g.level}`, 15, 50);
+
+    // 酔いゲージ
+    ctx.fillStyle = LCD_GHOST;
+    ctx.fillRect(80, 40, 100, 10);
+    ctx.fillStyle = g.drunkGauge > 70 ? "#c04040" : LCD_DARK;
+    ctx.fillRect(80, 40, g.drunkGauge, 10);
+    ctx.fillStyle = LCD_DARK;
+    ctx.font = "10px 'DotGothic16', monospace";
+    ctx.fillText("DRUNK", 185, 49);
+
+    // ── カウンター ──
+    ctx.fillStyle = LCD_DARK;
+    ctx.fillRect(20, 400, w - 40, 4);
+
+    // ── ビール（ゴースト含む） ──
+    const beerY = 200;
+    for (let i = 0; i < 3; i++) {
+      const x = 60 + i * 140;
+      // ゴースト（常に薄く表示）
+      ctx.globalAlpha = 0.08;
+      drawBeer(ctx, x, beerY, false);
+      ctx.globalAlpha = 1.0;
+
+      if (g.beers[i]) {
+        const isMetal = g.metalBeer === i;
+        if (isMetal) {
+          // メタルビアキラキラ
+          ctx.globalAlpha = 0.6 + 0.4 * Math.sin(g.frameCount * 0.3);
+          drawBeer(ctx, x, beerY, true);
+          ctx.globalAlpha = 1.0;
+        } else {
+          drawBeer(ctx, x, beerY, false);
+        }
+      }
+    }
+
+    // ── 店長 ──
+    const bossX = 60 + g.bossPos * 140;
+    const bossY = 300;
+    // ゴースト（全ポジション）
+    for (let i = 0; i < 3; i++) {
+      ctx.globalAlpha = 0.08;
+      drawBoss(ctx, 60 + i * 140, bossY, "right", false);
+      ctx.globalAlpha = 1.0;
+    }
+    drawBoss(ctx, bossX, bossY, g.bossLookDir, g.bossDir === "turning");
+
+    // ── バイト ──
+    const playerX = 60 + g.playerPos * 140;
+    const playerY = 430;
+    // ゴースト
+    for (let i = 0; i < 3; i++) {
+      ctx.globalAlpha = 0.08;
+      drawPlayer(ctx, 60 + i * 140, playerY, false);
+      ctx.globalAlpha = 1.0;
+    }
+    drawPlayer(ctx, playerX, playerY, g.isDrinking);
+
+    // ── ボーナステキスト ──
+    if (g.bonusTimer > 0) {
+      ctx.fillStyle = LCD_DARK;
+      ctx.font = "bold 20px 'DotGothic16', monospace";
+      ctx.textAlign = "center";
+      ctx.globalAlpha = g.bonusTimer / FPS;
+      ctx.fillText(g.bonusText, w / 2, 170);
+      ctx.globalAlpha = 1.0;
+    }
+
+    // コンボ表示
+    if (g.combo > 1 && !g.isDrinking) {
+      ctx.fillStyle = LCD_DARK;
+      ctx.font = "12px 'DotGothic16', monospace";
+      ctx.textAlign = "center";
+      ctx.fillText(`${g.combo} COMBO`, w / 2, 510);
+    }
+
+    // 操作ガイド
+    ctx.fillStyle = "rgba(26,32,16,0.3)";
+    ctx.font = "10px 'DotGothic16', monospace";
+    ctx.textAlign = "center";
+    ctx.fillText("← → : いどう    SPACE : のむ", w / 2, h - 10);
+  }, []);
+
+  // ── タイトル画面 ──
+  const renderTitle = (ctx: CanvasRenderingContext2D, g: GameData) => {
+    ctx.fillStyle = LCD_DARK;
+    ctx.textAlign = "center";
+
+    ctx.font = "bold 28px 'DotGothic16', monospace";
+    ctx.fillText("METAL BEER", CANVAS_W / 2, 160);
+    ctx.font = "bold 22px 'DotGothic16', monospace";
+    ctx.fillText("SOLID", CANVAS_W / 2, 195);
+
+    ctx.font = "14px 'DotGothic16', monospace";
+    ctx.fillText("〜 メタルビア・ソリッド 〜", CANVAS_W / 2, 240);
+
+    // ビール装飾
+    drawBeer(ctx, CANVAS_W / 2 - 70, 280, false);
+    drawBeer(ctx, CANVAS_W / 2, 270, true);
+    drawBeer(ctx, CANVAS_W / 2 + 70, 280, false);
+
+    ctx.font = "12px 'DotGothic16', monospace";
+    ctx.fillText("店長の目を盗んでビールを飲め！", CANVAS_W / 2, 360);
+
+    // 点滅テキスト
+    if (Math.floor(g.frameCount / 6) % 2 === 0) {
+      ctx.font = "bold 16px 'DotGothic16', monospace";
+      ctx.fillText("PRESS SPACE TO START", CANVAS_W / 2, 420);
+    }
+
+    if (g.highScore > 0) {
+      ctx.font = "12px 'DotGothic16', monospace";
+      ctx.fillText(`HI-SCORE: ${g.highScore}`, CANVAS_W / 2, 470);
+    }
+
+    ctx.font = "10px 'DotGothic16', monospace";
+    ctx.fillStyle = "rgba(26,32,16,0.4)";
+    ctx.fillText("← → : いどう    SPACE : のむ / スタート", CANVAS_W / 2, CANVAS_H - 15);
+  };
+
+  // ── ゲームオーバー ──
+  const renderGameOver = (ctx: CanvasRenderingContext2D, g: GameData) => {
+    ctx.fillStyle = LCD_DARK;
+    ctx.textAlign = "center";
+
+    ctx.font = "bold 28px 'DotGothic16', monospace";
+    ctx.fillText("GAME OVER", CANVAS_W / 2, 160);
+
+    ctx.font = "bold 18px 'DotGothic16', monospace";
+    ctx.fillText("「クビだ！」", CANVAS_W / 2, 210);
+
+    ctx.font = "16px 'DotGothic16', monospace";
+    ctx.fillText(`SCORE: ${g.score}`, CANVAS_W / 2, 280);
+
+    if (g.score >= g.highScore && g.score > 0) {
+      ctx.font = "bold 14px 'DotGothic16', monospace";
+      ctx.fillText("NEW RECORD!", CANVAS_W / 2, 310);
+    }
+
+    ctx.font = "12px 'DotGothic16', monospace";
+    ctx.fillText(`HI-SCORE: ${g.highScore}`, CANVAS_W / 2, 350);
+
+    if (Math.floor(g.frameCount / 6) % 2 === 0) {
+      ctx.font = "bold 14px 'DotGothic16', monospace";
+      ctx.fillText("PRESS SPACE TO RETRY", CANVAS_W / 2, 420);
+    }
+  };
+
+  // ── ビール描画 ──
+  const drawBeer = (ctx: CanvasRenderingContext2D, x: number, y: number, isMetal: boolean) => {
+    ctx.save();
+    // ジョッキ本体
+    ctx.fillStyle = isMetal ? LCD_ACCENT : LCD_DARK;
+    ctx.fillRect(x - 12, y - 20, 24, 30);
+    // 取っ手
+    ctx.fillRect(x + 12, y - 14, 8, 18);
+    ctx.clearRect(x + 14, y - 10, 4, 10);
+    // 泡
+    ctx.fillRect(x - 14, y - 24, 28, 8);
+    ctx.fillRect(x - 10, y - 28, 20, 6);
+
+    if (isMetal) {
+      // キラキラ
+      ctx.fillStyle = "#ffffff";
+      ctx.globalAlpha = 0.6;
+      ctx.fillRect(x - 6, y - 18, 3, 3);
+      ctx.fillRect(x + 4, y - 10, 2, 2);
+      ctx.globalAlpha = 1.0;
+    }
+    ctx.restore();
+  };
+
+  // ── 店長描画 ──
+  const drawBoss = (ctx: CanvasRenderingContext2D, x: number, y: number, lookDir: string, turning: boolean) => {
+    ctx.save();
+    ctx.fillStyle = turning ? "rgba(26,32,16,0.5)" : LCD_DARK;
+
+    // 体（スーツ）
+    ctx.fillRect(x - 14, y - 10, 28, 35);
+    // 頭
+    ctx.fillRect(x - 10, y - 30, 20, 22);
+    // ネクタイ
+    ctx.clearRect(x - 2, y - 8, 4, 20);
+
+    // 目（向き表現）
+    ctx.fillStyle = LCD_BG;
+    if (lookDir === "left") {
+      ctx.fillRect(x - 7, y - 24, 4, 4);
+      ctx.fillRect(x + 1, y - 24, 4, 4);
+      // 瞳
+      ctx.fillStyle = turning ? "rgba(26,32,16,0.5)" : LCD_DARK;
+      ctx.fillRect(x - 7, y - 24, 2, 4);
+      ctx.fillRect(x + 1, y - 24, 2, 4);
+    } else {
+      ctx.fillRect(x - 7, y - 24, 4, 4);
+      ctx.fillRect(x + 1, y - 24, 4, 4);
+      ctx.fillStyle = turning ? "rgba(26,32,16,0.5)" : LCD_DARK;
+      ctx.fillRect(x - 5, y - 24, 2, 4);
+      ctx.fillRect(x + 3, y - 24, 2, 4);
+    }
+
+    // 「！」マーク（振り返り中）
+    if (turning) {
+      ctx.fillStyle = LCD_DARK;
+      ctx.font = "bold 18px 'DotGothic16', monospace";
+      ctx.textAlign = "center";
+      ctx.fillText("!", x, y - 38);
+    }
+
+    // てんちょう
+    ctx.fillStyle = LCD_DARK;
+    ctx.font = "9px 'DotGothic16', monospace";
+    ctx.textAlign = "center";
+    ctx.fillText("てんちょう", x, y + 40);
+
+    ctx.restore();
+  };
+
+  // ── バイト描画 ──
+  const drawPlayer = (ctx: CanvasRenderingContext2D, x: number, y: number, drinking: boolean) => {
+    ctx.save();
+    ctx.fillStyle = LCD_DARK;
+
+    // 体
+    ctx.fillRect(x - 12, y - 8, 24, 32);
+    // 頭
+    ctx.fillRect(x - 9, y - 26, 18, 20);
+    // キャップ
+    ctx.fillRect(x - 11, y - 30, 22, 6);
+
+    if (drinking) {
+      // 飲みモーション：腕を上げてジョッキ
+      ctx.fillRect(x + 12, y - 20, 6, 4);
+      ctx.fillRect(x + 16, y - 28, 4, 12);
+      // ジョッキ
+      ctx.fillRect(x + 14, y - 38, 12, 14);
+      // ゴクゴクエフェクト
+      ctx.fillStyle = LCD_BG;
+      ctx.fillRect(x - 5, y - 20, 3, 3);
+      ctx.fillStyle = LCD_DARK;
+      ctx.font = "10px 'DotGothic16', monospace";
+      ctx.textAlign = "center";
+      ctx.fillText("ゴクゴク", x, y + 38);
+    } else {
+      // 通常立ちポーズ
+      ctx.fillRect(x - 18, y, 6, 4);
+      ctx.fillRect(x + 12, y, 6, 4);
+      ctx.font = "9px 'DotGothic16', monospace";
+      ctx.textAlign = "center";
+      ctx.fillText("バイト", x, y + 38);
+    }
+
+    ctx.restore();
+  };
+
+  // ── 入力ハンドラ ──
+  const handleInput = useCallback((action: "left" | "right" | "drink") => {
+    const g = gameRef.current;
+    if (!g) return;
+
+    if (g.state === "title") {
+      if (action === "drink") {
+        Object.assign(g, initGame(), { state: "playing", highScore: g.highScore });
+      }
+      return;
+    }
+
+    if (g.state === "gameover") {
+      if (action === "drink") {
+        Object.assign(g, initGame(), { state: "playing", highScore: g.highScore });
+      }
+      return;
+    }
+
+    if (g.state !== "playing") return;
+    if (g.missFlash > 0) return; // ミス中は操作不可
+
+    // 酔いによる操作遅延
+    const drunkDelay = g.drunkGauge > 60 ? Math.random() < 0.3 : false;
+    if (drunkDelay) return;
+
+    if (action === "left" && !g.isDrinking) {
+      g.playerPos = Math.max(0, g.playerPos - 1) as Pos;
+    } else if (action === "right" && !g.isDrinking) {
+      g.playerPos = Math.min(2, g.playerPos + 1) as Pos;
+    } else if (action === "drink" && !g.isDrinking && g.beers[g.playerPos]) {
+      g.isDrinking = true;
+      g.drinkTimer = FPS; // 約1秒のモーション
+      g.drinkPos = g.playerPos;
+      g.beers[g.playerPos] = false;
+      g.beerRespawnTimers[g.playerPos] = 0;
+    }
+  }, [initGame]);
+
+  // ── ゲームループ初期化 ──
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    gameRef.current = initGame();
+
+    const loop = (time: number) => {
+      const elapsed = time - lastFrameRef.current;
+      if (elapsed >= 1000 / FPS) {
+        lastFrameRef.current = time;
+        const g = gameRef.current!;
+        g.frameCount++;
+        update(g);
+        render(ctx, g);
+        setTick(t => t + 1);
+      }
+      animFrameRef.current = requestAnimationFrame(loop);
+    };
+
+    animFrameRef.current = requestAnimationFrame(loop);
+
+    return () => cancelAnimationFrame(animFrameRef.current);
+  }, [initGame, update, render]);
+
+  // ── キーボード入力 ──
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft" || e.key === "a") { e.preventDefault(); handleInput("left"); }
+      else if (e.key === "ArrowRight" || e.key === "d") { e.preventDefault(); handleInput("right"); }
+      else if (e.key === " " || e.key === "Enter") { e.preventDefault(); handleInput("drink"); }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [handleInput]);
+
+  // ── タッチ操作 ──
+  const touchStartX = useRef<number>(0);
 
   return (
     <div className="min-h-screen bg-gray-950 text-gray-100 relative scanlines">
@@ -120,104 +655,72 @@ export default function Games() {
           </div>
         </nav>
 
-        {/* タイトル */}
-        <section className="py-12 px-4 text-center">
-          <div className="flex gap-1 justify-center mb-6">
-            {Array.from({length: 8}).map((_, i) => (
-              <div key={i} className={`w-3 h-3 ${i % 2 === 0 ? "bg-blue-400" : "bg-yellow-400"}`} />
-            ))}
+        {/* ゲーム画面 */}
+        <section className="py-8 px-4 flex flex-col items-center">
+          <div className="mb-4 text-center">
+            <h2 className="font-pixel text-lg text-yellow-300 mb-1">メタルビア・ソリッド</h2>
+            <p className="font-pixel-en text-[8px] text-gray-500">METAL BEER SOLID</p>
           </div>
-          <h2 className="font-pixel text-2xl md:text-4xl text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-yellow-300 mb-4 leading-relaxed">
-            ゲーム
-          </h2>
-          <p className="font-pixel text-xs text-gray-400">
-            ファミコン・ゲームボーイの名作たち
-          </p>
-        </section>
 
-        {/* ゲーム一覧 */}
-        <section className="px-4 pb-16">
-          <div className="max-w-4xl mx-auto space-y-12">
-            {games.map((game) => (
-              <div
-                key={game.title}
-                className={`retro-card ${game.color} ${game.bgColor} rounded-none p-6 md:p-8 animate-pixel-fade-in`}
-              >
-                {/* タイトル */}
-                <div className="mb-6">
-                  <h3 className={`font-pixel text-xl md:text-2xl ${game.textColor} mb-1`}>
-                    {game.title}
-                  </h3>
-                  <span className="font-pixel-en text-[9px] text-gray-500">
-                    {game.titleEn}
-                  </span>
-                </div>
+          {/* LCD風フレーム */}
+          <div
+            className="relative border-4 border-gray-700 rounded-lg p-2"
+            style={{ background: "#3a3a2e", boxShadow: "inset 0 0 20px rgba(0,0,0,0.5), 0 4px 12px rgba(0,0,0,0.5)" }}
+          >
+            <canvas
+              ref={canvasRef}
+              width={CANVAS_W}
+              height={CANVAS_H}
+              className="block rounded"
+              style={{ imageRendering: "pixelated", maxWidth: "100%", height: "auto" }}
+              onTouchStart={(e) => {
+                touchStartX.current = e.touches[0].clientX;
+              }}
+              onTouchEnd={(e) => {
+                const dx = e.changedTouches[0].clientX - touchStartX.current;
+                if (Math.abs(dx) > 30) {
+                  handleInput(dx < 0 ? "left" : "right");
+                } else {
+                  handleInput("drink");
+                }
+              }}
+            />
+          </div>
 
-                {/* 基本情報 */}
-                <div className="grid gap-2 mb-6">
-                  {[
-                    ["機種", game.platform],
-                    ["発売日", game.year],
-                    ["開発", game.developer],
-                    ["ジャンル", game.genre],
-                    ...(game.price ? [["価格", game.price]] : []),
-                  ].map(([key, value]) => (
-                    <div key={key} className="flex flex-col sm:flex-row sm:gap-4">
-                      <span className="font-pixel text-xs text-gray-500 sm:w-20 shrink-0">{key}</span>
-                      <span className="font-pixel text-xs text-gray-300">{value}</span>
-                    </div>
-                  ))}
-                </div>
+          {/* モバイル操作ボタン */}
+          <div className="mt-6 flex gap-4 md:hidden">
+            <button
+              onTouchStart={() => handleInput("left")}
+              className="retro-card border-blue-400 bg-blue-900/30 rounded-none px-6 py-4 font-pixel text-blue-300 text-lg active:scale-95"
+            >
+              ◀
+            </button>
+            <button
+              onTouchStart={() => handleInput("drink")}
+              className="retro-card border-yellow-400 bg-yellow-900/30 rounded-none px-6 py-4 font-pixel text-yellow-300 text-sm active:scale-95"
+            >
+              のむ
+            </button>
+            <button
+              onTouchStart={() => handleInput("right")}
+              className="retro-card border-blue-400 bg-blue-900/30 rounded-none px-6 py-4 font-pixel text-blue-300 text-lg active:scale-95"
+            >
+              ▶
+            </button>
+          </div>
 
-                {/* ストーリー */}
-                <div className="border-t border-gray-700 pt-4 mb-6">
-                  <h4 className={`font-pixel text-sm ${game.textColor} mb-3`}>
-                    ── ストーリー ──
-                  </h4>
-                  <p className="font-pixel text-xs text-gray-300 leading-relaxed">
-                    {game.story}
-                  </p>
-                </div>
-
-                {/* 特徴 */}
-                <div className="border-t border-gray-700 pt-4 mb-6">
-                  <h4 className={`font-pixel text-sm ${game.textColor} mb-3`}>
-                    ── 特徴 ──
-                  </h4>
-                  <ul className="space-y-2">
-                    {game.features.map((feature, i) => (
-                      <li key={i} className="font-pixel text-[10px] text-gray-300 leading-relaxed pl-4 relative">
-                        <span className={`absolute left-0 ${game.textColor}`}>▸</span>
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* 評価・補足 */}
-                <div className="space-y-2">
-                  <div className="bg-black/30 border border-gray-700 p-3">
-                    <p className={`font-pixel text-[10px] ${game.textColor}`}>
-                      ★ {game.evaluation}
-                    </p>
-                  </div>
-                  {game.note && (
-                    <div className="bg-black/30 border border-gray-700 p-3">
-                      <p className="font-pixel text-[10px] text-gray-400">
-                        ※ {game.note}
-                      </p>
-                    </div>
-                  )}
-                  {game.remake && (
-                    <div className="bg-black/30 border border-gray-700 p-3">
-                      <p className="font-pixel text-[10px] text-gray-400">
-                        リメイク: {game.remake}
-                      </p>
-                    </div>
-                  )}
-                </div>
-              </div>
-            ))}
+          {/* 説明 */}
+          <div className="mt-8 max-w-md retro-card border-green-400 bg-green-900/20 rounded-none p-4 animate-pixel-fade-in">
+            <h3 className="font-pixel text-sm text-green-300 mb-3">── あそびかた ──</h3>
+            <ul className="space-y-2 font-pixel text-[10px] text-gray-300">
+              <li>▸ ← → キー（またはスワイプ）でバイトを移動</li>
+              <li>▸ スペースキー（またはタップ）でビールを飲む</li>
+              <li>▸ 店長に見つからないように飲むべし！</li>
+              <li>▸ 連続で飲むとコンボボーナス</li>
+              <li>▸ 銀色のメタルビアは500点！</li>
+              <li>▸ 飲みすぎると酔っ払って操作が…？</li>
+              <li>▸ 3回見つかったらゲームオーバー（クビ！）</li>
+            </ul>
           </div>
         </section>
 
