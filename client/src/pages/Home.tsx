@@ -144,7 +144,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 推し活サイトリンク（ジェリービーンズコレクション） */}
+        {/* 推し活サイトリンク（ジェリービーンズ・コレクション） */}
         <section className="py-12 px-4">
           <div className="max-w-4xl mx-auto">
             <a
@@ -156,7 +156,7 @@ export default function Home() {
                 <span className="text-3xl">🫘</span>
                 <div className="flex-1">
                   <h3 className="font-pixel text-lg text-pink-300 mb-1">
-                    ジェリービーンズコレクション
+                    ジェリービーンズ・コレクション
                   </h3>
                   <p className="font-pixel text-xs text-gray-400">
                     推し活サイト ─ 北海道出身の男女お笑いコンビ

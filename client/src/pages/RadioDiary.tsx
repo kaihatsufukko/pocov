@@ -142,7 +142,7 @@ export default function RadioDiary() {
             ジェリコレのラジオ日記
           </h1>
           <p className="text-lg text-gray-600 leading-relaxed max-w-xl mx-auto">
-            男女コンビ ジェリービーンズコレクションのラジオを聴いた感想などを残しておく場所です。
+            男女コンビ ジェリービーンズ・コレクションのラジオを聴いた感想などを残しておく場所です。
           </p>
 
           {/* ジェリービーンズ装飾 */}

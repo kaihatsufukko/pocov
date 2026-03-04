@@ -39,7 +39,7 @@ const members: Member[] = [
     weight: "48kg",
     bloodType: "A型",
     description:
-      "ジェリービーンズコレクションのメンバー。明るく元気なキャラクターで、観客を笑顔にします。ラジオでも自由奔放なトークで番組を盛り上げています。2015年に一般会社員と結婚し、出産しました。",
+      "ジェリービーンズ・コレクションのメンバー。明るく元気なキャラクターで、観客を笑顔にします。ラジオでも自由奔放なトークで番組を盛り上げています。2015年に一般会社員と結婚し、出産しました。",
     specialty: "ドライブ、散歩、北海道観光案内",
     image: "/images/akiharu-illustration.png",
   },
@@ -54,7 +54,7 @@ const members: Member[] = [
     weight: "53kg",
     bloodType: "A型",
     description:
-      "ジェリービーンズコレクションのメンバー。知識豊富で、ラジオではためになる話題も提供します。兄はプロ格闘家の井島裕彰。",
+      "ジェリービーンズ・コレクションのメンバー。知識豊富で、ラジオではためになる話題も提供します。兄はプロ格闘家の井島裕彰。",
     specialty: "散歩",
     image: "/images/ijima-illustration.png",
   },
@@ -66,7 +66,7 @@ const radioReviews: RadioReview[] = [
     title: "最高に面白かった回！",
     date: "2025年12月15日",
     content:
-      "ジェリービーンズコレクションのラジオは本当に面白いです。毎週楽しみにしています。このエピソードは特に笑いました！メンバーの掛け合いが最高です。",
+      "ジェリービーンズ・コレクションのラジオは本当に面白いです。毎週楽しみにしています。このエピソードは特に笑いました！メンバーの掛け合いが最高です。",
     rating: 5,
     author: "ファン太郎",
   },
@@ -75,7 +75,7 @@ const radioReviews: RadioReview[] = [
     title: "ラジオで元気をもらってます",
     date: "2025年12月10日",
     content:
-      "毎日仕事が大変ですが、ジェリービーンズコレクションのラジオを聴くと元気が出ます。二人の掛け合いが最高です。これからも応援しています！",
+      "毎日仕事が大変ですが、ジェリービーンズ・コレクションのラジオを聴くと元気が出ます。二人の掛け合いが最高です。これからも応援しています！",
     rating: 5,
     author: "リスナー花子",
   },
@@ -113,7 +113,7 @@ export default function JellyBeans() {
           <div className="flex items-center gap-2">
             <img src="/images/jbc-logo.png" alt="JBC Logo" className="w-12 h-12" />
             <span className="text-sm font-bold text-gray-700">
-              ジェリービーンズコレクション
+              ジェリービーンズ・コレクション
             </span>
           </div>
           <div className="flex gap-4">
@@ -167,7 +167,7 @@ export default function JellyBeans() {
             {/* タイトルと右側の装飾 */}
             <div className="flex justify-center items-center mb-6">
               {/* タイトル画像 */}
-              <img src="/images/jellybeans-title.png" alt="ジェリービーンズコレクション" className="max-w-full h-auto" />
+              <img src="/images/jellybeans-title.png" alt="ジェリービーンズ・コレクション" className="max-w-full h-auto" />
             </div>
 
             {/* ジェリービーンズ装飾 - 下 */}
@@ -221,13 +221,13 @@ export default function JellyBeans() {
 
           {/* コンビ紹介画像 */}
           <div className="mb-12 flex justify-center">
-            <img src="/images/combo-illustration.png" alt="ジェリービーンズコレクション" className="max-w-2xl w-full rounded-3xl shadow-lg" />
+            <img src="/images/combo-illustration.png" alt="ジェリービーンズ・コレクション" className="max-w-2xl w-full rounded-3xl shadow-lg" />
           </div>
 
           {/* コンビ情報 */}
           <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-3xl p-8 mb-12">
             <p className="text-lg text-gray-700 leading-relaxed mb-6">
-              ジェリービーンズコレクションは、吉本興業所属（専属エージェント笄約）の北海道出身の男女お笑いコンビ。
+              ジェリービーンズ・コレクションは、吉本興業所属（専属エージェント笄約）の北海道出身の男女お笑いコンビ。
             </p>
 
             {/* メンバー情報 */}
@@ -308,7 +308,7 @@ export default function JellyBeans() {
           <div className="flex items-center justify-center gap-4 mb-2">
             <img src="/images/jelly-footer.png" alt="jelly" className="w-8 h-8" />
             <p className="text-lg font-bold">
-              ジェリービーンズコレクション 推し活サイト
+              ジェリービーンズ・コレクション 推し活サイト
             </p>
             <img src="/images/jelly-footer.png" alt="jelly" className="w-8 h-8" />
           </div>

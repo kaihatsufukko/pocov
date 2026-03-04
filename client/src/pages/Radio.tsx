@@ -1,5 +1,5 @@
 /**
- * ラジオページ - ジェリービーンズコレクション推し活リンク
+ * ラジオページ - ジェリービーンズ・コレクション推し活リンク
  */
 
 import { useLocation } from "wouter";
@@ -7,7 +7,7 @@ import { useLocation } from "wouter";
 const links = [
   {
     title: "Stand FM",
-    description: "ジェリービーンズコレクションのStand FMチャンネル",
+    description: "ジェリービーンズ・コレクションのStand FMチャンネル",
     url: "https://stand.fm/channels/638ff742df23c21009a836e7",
     icon: "📻",
     color: "border-orange-400",
@@ -16,7 +16,7 @@ const links = [
   },
   {
     title: "Radio Talk",
-    description: "ジェリービーンズコレクションのRadio Talkチャンネル",
+    description: "ジェリービーンズ・コレクションのRadio Talkチャンネル",
     url: "https://radiotalk.jp/program/135800",
     icon: "🎙️",
     color: "border-pink-400",
@@ -25,7 +25,7 @@ const links = [
   },
   {
     title: "YouTube",
-    description: "ジェリービーンズコレクションのYouTubeチャンネル",
+    description: "ジェリービーンズ・コレクションのYouTubeチャンネル",
     url: "https://www.youtube.com/@jb.c",
     icon: "▶",
     color: "border-red-400",
@@ -82,7 +82,7 @@ export default function Radio() {
             ラジオ
           </h2>
           <p className="font-pixel text-xs text-gray-400">
-            ジェリービーンズコレクション 推し活コーナー
+            ジェリービーンズ・コレクション 推し活コーナー
           </p>
         </section>
 
@@ -94,7 +94,7 @@ export default function Radio() {
                 <span className="text-4xl">🫘</span>
                 <div>
                   <h3 className="font-pixel text-xl text-yellow-300 mb-1">
-                    ジェリービーンズコレクション
+                    ジェリービーンズ・コレクション
                   </h3>
                   <span className="font-pixel-en text-[9px] text-gray-500">
                     JELLYBEANS COLLECTION
