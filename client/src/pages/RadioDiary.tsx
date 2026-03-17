@@ -13,6 +13,15 @@ interface DiaryEntry {
 
 const diaryEntries: DiaryEntry[] = [
   {
+    id: 8,
+    title: "歯医者行かない芸人",
+    date: "2026年3月16日",
+    platform: "Stand FM",
+    content:
+      "　歯医者に行かない芸人のうち、パンプキンポテトフライの谷拓哉さんだけは歯磨きが得意で虫歯が無いため、歯医者に行く必要が無いので行かないのです。\n　30年以上生きて虫歯無いなんて信じられない。",
+    rating: 5,
+  },
+  {
     id: 7,
     title: "カップ焼きそば",
     date: "2026年3月13日",
