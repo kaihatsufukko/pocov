@@ -130,10 +130,12 @@ export default function JellyBeans() {
             </Button>
             <Button
               variant="ghost"
-              className="font-bold text-blue-600 hover:bg-blue-100"
+              className="font-bold text-blue-600 hover:bg-blue-100 text-xs leading-tight"
               onClick={() => setLocation("/jellybeans/radio-diary")}
             >
-              ジェリービーンズ・コレクション ラジオ日記
+              ジェリービーンズ・コレクション
+              <br />
+              ラジオ日記
             </Button>
           </div>
         </div>
@@ -301,6 +303,28 @@ export default function JellyBeans() {
           </div>
         </div>
       )}
+
+      {/* ラジオ日記リンク */}
+      <section className="py-12 px-4 bg-gradient-to-b from-white to-pink-50">
+        <div className="container mx-auto max-w-md text-center">
+          <button
+            onClick={() => setLocation("/jellybeans/radio-diary")}
+            className="group block mx-auto"
+          >
+            <img
+              src="/images/jbc-logo.png"
+              alt="ジェリービーンズ・コレクション ラジオ日記"
+              className="w-24 h-24 mx-auto mb-4 group-hover:scale-110 transition-transform"
+            />
+            <p className="text-lg font-black text-pink-600 group-hover:text-pink-500 transition-colors">
+              ジェリービーンズ・コレクション
+              <br />
+              ラジオ日記
+            </p>
+            <p className="text-sm text-gray-500 mt-1">ラジオ配信の感想など →</p>
+          </button>
+        </div>
+      </section>
 
       {/* フッター */}
       <footer className="bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-white py-12 px-4">

@@ -180,7 +180,7 @@ export default function RadioDiary() {
             ジェリービーンズ・コレクション ラジオ日記
           </h1>
           <h2 className="text-lg text-gray-600 leading-relaxed max-w-xl mx-auto">
-            いじまとあきはるのRadiotalk配信まとめ
+            ジェリービーンズ・コレクションのいじまさんとあきはるさんのラジオを聴いた感想など。
           </h2>
 
           {/* ジェリービーンズ装飾 */}
