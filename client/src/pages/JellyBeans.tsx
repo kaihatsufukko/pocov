@@ -133,7 +133,7 @@ export default function JellyBeans() {
               className="font-bold text-blue-600 hover:bg-blue-100"
               onClick={() => setLocation("/jellybeans/radio-diary")}
             >
-              ラジオ感想
+              ジェリービーンズ・コレクション ラジオ日記
             </Button>
           </div>
         </div>

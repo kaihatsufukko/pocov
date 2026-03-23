@@ -126,6 +126,17 @@ export default function RadioDiary() {
         </div>
       </nav>
 
+      {/* パンくずリスト */}
+      <nav className="container mx-auto px-4 py-3 text-sm text-gray-500" aria-label="パンくずリスト">
+        <ol className="flex items-center gap-1 flex-wrap">
+          <li><a href="/" className="hover:text-blue-500 transition-colors">ホーム</a></li>
+          <li className="mx-1">&gt;</li>
+          <li><a href="/jellybeans" className="hover:text-blue-500 transition-colors">ジェリービーンズ・コレクション</a></li>
+          <li className="mx-1">&gt;</li>
+          <li className="text-gray-800 font-bold">ラジオ日記</li>
+        </ol>
+      </nav>
+
       {/* ヒーローセクション */}
       <section className="relative py-20 px-4 overflow-hidden">
         {/* 背景装飾 */}
@@ -166,11 +177,11 @@ export default function RadioDiary() {
           </div>
 
           <h1 className="text-4xl md:text-5xl font-black mb-4 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-            ジェリコレのラジオ日記
+            ジェリービーンズ・コレクション ラジオ日記
           </h1>
-          <p className="text-lg text-gray-600 leading-relaxed max-w-xl mx-auto">
-            男女コンビ ジェリービーンズ・コレクションのラジオを聴いた感想などを残しておく場所です。
-          </p>
+          <h2 className="text-lg text-gray-600 leading-relaxed max-w-xl mx-auto">
+            いじまとあきはるのRadiotalk配信まとめ
+          </h2>
 
           {/* ジェリービーンズ装飾 */}
           <div className="flex justify-center gap-1 mt-6 flex-wrap">
