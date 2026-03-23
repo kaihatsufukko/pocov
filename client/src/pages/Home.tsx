@@ -161,6 +161,13 @@ export default function Home() {
                   <p className="font-pixel text-xs text-gray-400">
                     推し活サイト ─ 北海道出身の男女お笑いコンビ
                   </p>
+                  <a
+                    href="/jellybeans/radio-diary"
+                    className="font-pixel text-[10px] text-pink-400 hover:text-pink-300 transition-colors mt-1 inline-block"
+                    onClick={(e) => { e.preventDefault(); e.stopPropagation(); setLocation("/jellybeans/radio-diary"); }}
+                  >
+                    ▶ ジェリービーンズ・コレクション ラジオ日記
+                  </a>
                 </div>
                 <span className="font-pixel text-pink-400 text-lg group-hover:translate-x-1 transition-transform">
                   ▶
